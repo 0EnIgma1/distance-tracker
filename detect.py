@@ -3,36 +3,26 @@ import matplotlib.pyplot as plt
 import time  
 import cvzone
 from cvzone.FaceMeshModule import FaceMeshDetector
+import numpy as np
 
-'''
-# declaration of variables  
-initialTime = 0  
-initialDistance = 0  
-changeInTime = 0  
-changeInDistance = 0  
-listDistance = []  
-listSpeed = []
-
-DECLARED_LEN = 60 # cm  
-# width of the object face  
-DECLARED_WID = 14.3 # cm  
-# Definition of the RGB Colors format 
-#Defining the fonts family, size, type  
-fonts = cv2.FONT_HERSHEY_COMPLEX
-'''
-distance = 50
-W = 6.3
-
+#w -> the height of the detectionbox
+#distance -> the initial distance through which the focal length is found
+#W -> initial height of the face/object detectionbox when placed in the initial distance
+ 
+distance = 50.0
+W = 5.23
 def focal(w,distance,W):
-    f = (w * distance) / W
+    f = (w * distance)/ W
+    print(f)
     return f
 
-f = 539
+f = 48 #this is found by facing face/object at 50cm distance and measuring the height of the detectionbox and passing it to the focal function
+
 xml_data = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 cap = cv2.VideoCapture(0)
 detector = FaceMeshDetector(maxFaces = 1)
 
-def distance(f,W,w):
+def distance_find(f,W,w):
     d = int((W * f) / w)
     return d
 
@@ -45,7 +35,7 @@ while True:
         pointRight = face[374]
         #cv2.circle(frame,pointLeft,5,(0,0,255),-1)
         #cv2.circle(frame,pointRight,5,(0,0,255),-1)
-        w,_ = detector.findDistance(pointLeft,pointRight)
+        #w,_ = detector.findDistance(pointLeft,pointRight)
         #print(focal(w,distance,W))
     detecting = xml_data.detectMultiScale(frame,   
                                    minSize = (30, 30))  
@@ -57,8 +47,11 @@ while True:
             cv2.rectangle(frame, (a, b), # Highlighting detected object with rectangle  
                           (a + height, b + width),   
                           (0, 255, 0), 2)
-    
-    cv2.putText(frame,f"distance: {distance(f,W,w)} cm",(100,50),cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0),2)
+
+            pixel = height
+            w = pixel * 0.02645
+            w = float(w)
+        cv2.putText(frame,f"distance: {distance_find(f, W, w)} cm",(100,50),cv2.FONT_HERSHEY_SIMPLEX,1,(255,0,0),2) #distance(f,W,w)
     
     cv2.imshow("fame",frame)
     

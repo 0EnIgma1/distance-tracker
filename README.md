@@ -11,6 +11,6 @@
 
 - Then the distance is found by using the focal length found in the first stage
 
-- Right now this works for only faces because I could'nt find any object images data in openCV
+- Right now this works for only faces because I couldn't find any object images data in openCV
 
 - This distance is truely based on the accuracy of the detectionbox hence better detection algorithm = better result 

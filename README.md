@@ -16,5 +16,5 @@
 - This distance is truely based on the accuracy of the detectionbox hence better detection algorithm = better result 
 ## OUTPUT
 <p align="center">
-  <img width="500" height="250" src="https://github.com/0EnIgma1/distance-tracker/blob/main/dist.PNG">
+  <img src="https://github.com/0EnIgma1/distance-tracker/blob/main/dist.PNG">
 </p>

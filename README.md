@@ -14,3 +14,7 @@
 - Right now this works for only faces because I couldn't find any object images data in openCV..but the concept is the same, just the updation of the xml data is enough.
 
 - This distance is truely based on the accuracy of the detectionbox hence better detection algorithm = better result 
+## OUTPUT
+<p align="center">
+  <img width="500" height="250" src="https://github.com/0EnIgma1/distance_tracker/blob/main/dist.PNG">
+</p>
